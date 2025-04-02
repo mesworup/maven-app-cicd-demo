@@ -1,9 +1,24 @@
 pipeline{
     agent any
     stages{
-            stage('Build Stage'){
+            stage('Unit Test'){
                 steps{
-                sh "echo Hello World"
+                sh "echo Running unittest"
+            }
+        }
+           stage('Build Stage'){
+                steps{
+                sh "echo Building application"
+            }
+        }
+           stage('Package application'){
+                steps{
+                sh "echo Packaging application"
+            }
+        }
+           stage('Deploy app'){
+                steps{
+                sh "echo Deploying the app"
             }
         }
     }
