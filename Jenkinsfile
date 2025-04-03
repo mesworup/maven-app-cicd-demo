@@ -1,5 +1,8 @@
 pipeline{
     agent any
+     environment {
+        dockerImage = "mesworup/devops-evening"  
+    }
     stages{
             stage('Build Java App'){
                 steps{
@@ -17,17 +20,21 @@ pipeline{
                     copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER)
                     echo "Creating Docker Image"
                     sh 'whoami'
-                    sh 'docker build -t localtomcatimg:$BUILD_NUMBER .'
+                    sh 'docker build -t $dockerImage:$BUILD_NUMBER .'
             }
         }
-           stage('Package application'){
+           stage('Tag and Push image'){
                 steps{
-                sh "echo Packaging application"
+                withDockerRegistry([credentialsId: 'dockerhub-credentials', url: '']) {
+                    sh '''
+                    docker push $dockerImage:$BUILD_NUMBER
+                    '''
             }
         }
            stage('Deploy app'){
                 steps{
-                sh "echo Deploying the app"
+                
+                }
             }
         }
     }
