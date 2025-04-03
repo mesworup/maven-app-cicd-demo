@@ -29,8 +29,9 @@ pipeline{
                     sh '''
                     docker push $dockerImage:$BUILD_NUMBER
                     '''
-            }
-        }
+                    }
+                }
+           }
            stage('Deploy app'){
                 steps{
                 
