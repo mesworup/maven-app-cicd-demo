@@ -32,11 +32,6 @@ pipeline{
                     }
                 }
            }
-           stage('Deploy app'){
-                steps{
-                
-                }
-            }
+           
         }
     }
-}
