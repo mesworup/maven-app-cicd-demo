@@ -65,7 +65,7 @@ pipeline{
 
         stage('Deploy Production Environment') {
             agent {
-                label 'testnode'
+                label 'slave-node1'
             }
             steps {
                 timeout(time:1, unit:'DAYS'){
