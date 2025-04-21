@@ -1,5 +1,7 @@
 pipeline{
-    agent any
+    agent {
+        label 'slave-node1'
+    }
      environment {
         dockerImage = "mesworup/devops-evening"  
     }
